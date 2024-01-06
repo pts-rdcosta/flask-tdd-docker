@@ -45,7 +45,6 @@ class UsersList(Resource):
         return User.query.all(), 200
 
 
-
 class Users(Resource):
 
     @api.marshal_with(user)

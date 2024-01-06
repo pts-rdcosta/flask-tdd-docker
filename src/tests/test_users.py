@@ -83,7 +83,7 @@ def test_single_user_incorrect_id(test_app, test_database):
 
 
 def test_all_users(test_app, test_database, add_user):
-    test_database.session.query(User).delete() 
+    test_database.session.query(User).delete()
     add_user('michael', 'michael@mherman.org')
     add_user('fletcher', 'fletcher@notreal.com')
     client = test_app.test_client()
