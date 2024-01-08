@@ -1,6 +1,7 @@
 from flask.cli import FlaskGroup
 from src import create_app, db
-# Used to create empty table from Model if skipped then does not create the table in the DB
+# Used to create empty table from Model if skipped
+# then does not create the table in the DB
 from src.api.models import User
 
 
