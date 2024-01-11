@@ -10,7 +10,6 @@ services:
       - FLASK_ENV=development
       - APP_SETTINGS=src.config.DevelopmentConfig
       - DATABASE_URL=postgres://api_dev_xcdf_user:avmXZM8VrgZZa8onfxSc2ly0r7QTpHZa@dpg-cmb2g5vqd2ns73essk20-a/api_dev_xcdf
-      - DATABASE_EXTERNAL_URL:postgres://api_dev_xcdf_user:avmXZM8VrgZZa8onfxSc2ly0r7QTpHZa@dpg-cmb2g5vqd2ns73essk20-a.ohio-postgres.render.com/api_dev_xcdf
       - DATABASE_TEST_URL=postgresql://postgres:postgres@api-db:5432/api_test 
     ports:
       - 5000:5000  
