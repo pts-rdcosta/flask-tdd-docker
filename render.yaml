@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  api:
+    image: docker.io/rohandcosta/flask-tdd-docker-api
+    environment:
+      - FLASK_APP=src/__init__.py
+      - FLASK_DEBUG=1
+      - FLASK_ENV=development
+      - APP_SETTINGS=src.config.DevelopmentConfig
+      - DATABASE_URL=postgres://api_dev_xcdf_user:avmXZM8VrgZZa8onfxSc2ly0r7QTpHZa@dpg-cmb2g5vqd2ns73essk20-a/api_dev_xcdf
+      - DATABASE_EXTERNAL_URL:postgres://api_dev_xcdf_user:avmXZM8VrgZZa8onfxSc2ly0r7QTpHZa@dpg-cmb2g5vqd2ns73essk20-a.ohio-postgres.render.com/api_dev_xcdf
+      - DATABASE_TEST_URL=postgresql://postgres:postgres@api-db:5432/api_test 
+    ports:
+      - 5000:5000  
+    depends_on:  
+      - api-db
+
+  api-db: 
+    image: docker.io/rohandcosta/flask-tdd-docker-api-db  
+    environment:
+      - POSTGRES_USER=api_dev_xcdf_user
+      - POSTGRES_PASSWORD=avmXZM8VrgZZa8onfxSc2ly0r7QTpHZa
+      - DATABASE_URL=postgres://api_dev_xcdf_user:avmXZM8VrgZZa8onfxSc2ly0r7QTpHZa@dpg-cmb2g5vqd2ns73essk20-a/api_dev_xcdf
+      - CONNECTION_STRING=postgresql://postgres:postgres@api-db:5432/api_dev_xcdf
