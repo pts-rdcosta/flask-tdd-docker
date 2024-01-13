@@ -19,6 +19,6 @@ services:
     envVars:
       - key: APP_WORKERS
         value: "4"
- databases:
+databases:
   - name: api_dev_xcdf
     plan: small
