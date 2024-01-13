@@ -16,7 +16,7 @@ services:
         value: "4"
     dependencies:
       - api-db
-  - name: api-db
+    name: api-db
     env:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

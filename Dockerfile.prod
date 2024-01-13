@@ -47,6 +47,9 @@ ENV FLASK_DEBUG 0
 ENV FLASK_ENV production
 ENV APP_SETTINGS src.config.ProductionConfig
 
+ARG SECRET_KEY
+ENV SECRET_KEY $SECRET_KEY
+
 # install system dependencies
 RUN apt-get update \
   && apt-get -y install gcc postgresql \
