@@ -1,5 +1,5 @@
 services:
-  - type: web
+    type: web
     name: api
     buildCommand: ./usr/src/app/entrypoint.sh
     env:
