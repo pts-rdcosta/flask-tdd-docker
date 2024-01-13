@@ -13,7 +13,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DATABASE_URL=postgresql://postgres:postgres@api-db:5432/api_dev_xcdf
       - CONNECTION_STRING=postgresql://postgres:postgres@api-db:5432/api_dev_xcdf
-    startCommand: docker-entrypoint.sh postgres
+    buildCommand: docker-entrypoint.sh postgres
     startCommand: gunicorn -b 0.0.0.0:5000 -w 4 -k uvicorn.workers.UvicornWorker -t 300 src:app
     healthCheckPath: /
     envVars:
