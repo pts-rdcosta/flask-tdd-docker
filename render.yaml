@@ -1,5 +1,6 @@
 services:
-  - name: api
+  - type: web
+    name: api
     buildCommand: ./usr/src/app/entrypoint.sh
     env:
       - FLASK_APP=src/__init__.py
