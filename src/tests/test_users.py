@@ -168,6 +168,7 @@ def test_update_user_invalid(
 
 
 def test_update_user_duplicate_email(test_app, test_database, add_user):
+    test_database.session.query(User).delete()
     add_user("hajek", "rob@hajek.org")
     user = add_user("rob", "rob@notreal.com")
     client = test_app.test_client()
