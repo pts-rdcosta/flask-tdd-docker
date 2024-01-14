@@ -4,7 +4,7 @@ from datetime import datetime
 import pytest
 
 import src.api.users
-
+import src.api.crud
 
 def test_add_user_invalid_json(test_app, monkeypatch):
     client = test_app.test_client()
@@ -21,9 +21,9 @@ def test_add_user(test_app, monkeypatch):
 
     def mock_add_user(username, email):
         return True
-    monkeypatch.setattr(src.api.users, "get_user_by_email",
+    monkeypatch.setattr(src.api.crud, "get_user_by_email",
                         mock_get_user_by_email)
-    monkeypatch.setattr(src.api.users, "add_user", mock_add_user)
+    monkeypatch.setattr(src.api.crud, "add_user", mock_add_user)
 
     client = test_app.test_client()
     resp = client.post(
