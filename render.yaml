@@ -3,6 +3,6 @@ services:
   - type: web
     name: api
     runtime: docker
-    rootDir: /usr/src/app
+    rootDir: app
     dockerCommand: Dockerfile # optional (defaults to Dockerfile command)
     healthCheckPath: /
