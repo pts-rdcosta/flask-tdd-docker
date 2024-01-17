@@ -6,6 +6,7 @@ databases:
 services:
   - type: web
     name: mysite
+    runtime: python
     buildCommand: "./Dockerfile"
     startCommand: "./entrypoint.sh"
     envVars:
