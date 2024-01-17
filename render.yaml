@@ -1,49 +1,8 @@
 services:
   # A Docker web service
   - type: web
-    name: webdis
+    name: api
     runtime: docker
-    region: oregon # optional (defaults to oregon)
-    plan: standard # optional (defaults to starter instance type)
-    branch: master # optional (defaults to master)
-    rootDir: webdis
-    dockerCommand: ./webdis.sh # optional (defaults to Dockerfile command)
-    numInstances: 3 # optional (defaults to 1)
+    rootDir: /usr/src/app
+    dockerCommand: Dockerfile # optional (defaults to Dockerfile command)
     healthCheckPath: /
-    registryCredential: # optional (defaults to no credential)
-      fromRegistryCreds:
-        name: my-credentials
-    envVars:
-      - key: REDIS_HOST
-        fromService:
-          type: redis
-          name: lightning
-          property: host # available properties are listed below
-      - key: REDIS_PORT
-        fromService:
-          type: redis
-          name: lightning
-          property: port
-      - fromGroup: conc-settings
-
-databases:
-  - name: elephant
-    databaseName: mydb # optional (Render may add a suffix)
-    user: adrian # optional
-    ipAllowList: # optional (defaults to allow all)
-      - source: 203.0.113.4/30
-        description: office
-      - source: 198.51.100.1
-        description: home
-    readReplicas: # optional (defaults to no replicas)
-      - name: elephant-replica
-
-envVarGroups:
-  - name: conc-settings
-    envVars:
-      - key: CONCURRENCY
-        value: 2
-      - key: SECRET
-        generateValue: true
-      - key: USER_PROVIDED_SECRET
-        sync: false
