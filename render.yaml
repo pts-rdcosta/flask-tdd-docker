@@ -1,12 +1,11 @@
 databases:
   - name: api_dev
     databaseName: api_dev_xcdf
-    user: api_dev_xcdf_user
+
 
 services:
   - type: web
     name: mysite
-    runtime: python
     buildCommand: "./Dockerfile"
     startCommand: "./entrypoint.sh"
     envVars:
