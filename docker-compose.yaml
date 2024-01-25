@@ -4,14 +4,17 @@ services:
 
   api:
     build:
-      context: .
+      context: ./services/users
       dockerfile: Dockerfile
     entrypoint: ['/usr/src/app/entrypoint.sh']
     volumes:
-      - .:/usr/src/app
+      - './services/users:/usr/src/app'
     ports:
       - 5004:5000
     environment:
+      - CHOKIDAR_USEPOLLING=true"
+      - WATCHPACK_POLLING =true
+      - WDS_SOCKET_PORT=5004
       - FLASK_APP=src/__init__.py
       - FLASK_DEBUG=1
       - FLASK_ENV=development
@@ -23,7 +26,7 @@ services:
   
   api-db: 
     build:
-      context: ./src/db
+      context: ./services/users/src/db
       dockerfile: Dockerfile
     expose:
       - 5432
@@ -32,3 +35,23 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DATABASE_URL=postgresql://postgres:postgres@api-db:5432/api_dev_xcdf
       - CONNECTION_STRING=postgresql://postgres:postgres@api-db:5432/api_dev_xcdf
+  
+  client:
+    stdin_open: true
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile
+    volumes:
+      - './services/client:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - 3007:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true # create-ui-app <= 5.x
+      - WATCHPACK_POLLING=true # create-ui-app >= 5.x
+      - FAST_REFRESH=false
+      - WDS_SOCKET_PORT=3007
+      - NODE_ENV=development
+      - REACT_APP_API_SERVICE_URL=${REACT_APP_API_SERVICE_URL}
+    depends_on:
+      - api
